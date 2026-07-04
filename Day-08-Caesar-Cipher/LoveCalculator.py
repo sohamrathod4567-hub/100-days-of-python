@@ -25,8 +25,8 @@ def calculate_love_score(name1, name2):
         print(t)
         if t == "e":
             love+=1
-score = str(true) + str(love)
-print(score)
+        score = str(true) + str(love)
+        print(score)
 
 
 calculate_love_score("KanyeWest", "KimKardashinan")
