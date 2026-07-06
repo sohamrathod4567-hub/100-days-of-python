@@ -15,9 +15,9 @@ Calculator = {
     "*":multiply,
     "/":divide,
 }
-number1 = int(input("Enter the first number: "))
+number1 = float(input("Enter the first number: "))
 operation = input("Enter the operation +, -, *, / : ")
-number2 = int(input("Enter the second number: "))
+number2 = float(input("Enter the second number: "))
 while Restart:
     result = 0
     if operation =="+":
@@ -37,10 +37,10 @@ while Restart:
         number1 = result
         print(f"Your First number is {result}")
         operation = input("Enter the operation +, -, *, / : ")
-        number2 = int(input("Enter the second number: "))
+        number2 = float(input("Enter the second number: "))
     if cont == "n":
         print("\n" * 169)
         print(art.logo)
-        number1 = int(input("Enter the first number: "))
+        number1 = float(input("Enter the first number: "))
         operation = input("Enter the operation +, -, *, / : ")
-        number2 = int(input("Enter the second number: "))
+        number2 = float(input("Enter the second number: "))
