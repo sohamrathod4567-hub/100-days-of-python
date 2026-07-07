@@ -40,6 +40,7 @@ python main.py
 ## 🎮 Example
 
 ```text
+
 Your cards: [10, 8]
 Current score: 18
 
