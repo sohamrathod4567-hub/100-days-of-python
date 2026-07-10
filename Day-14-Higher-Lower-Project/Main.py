@@ -1,39 +1,47 @@
 import random
 import art
 import game_data
-account_a = random.choice(game_data.data)
+def format_data(account):
+    """Formate the account data into printable format."""
+    account_name = account["name"]
+    account_desc = account["description"]
+    account_country = account["country"]
+    return f"{account_name}, a {account_desc} , from {account_country}"
+
+def check_answer(user_guess, a_followers, b_followers):
+    """Take a use's guess and follower count of a and b and returns if they get it right"""
+    if a_followers > b_followers:
+        return user_guess == "a"
+    else:
+        return user_guess == "b"
+score = 0
+game_should_continue =True
+
 account_b = random.choice(game_data.data)
-        # The details for the first person
-name_a = account_a["name"]
-followers_a = account_a["follower_count"]
-description_a = account_a["description"]
-country_a = account_a["country"]
-        # The details for the second person
-name_b = account_b["name"]
-followers_b = account_b["follower_count"]
-description_b = account_b["description"]
-country_b = account_b["country"]
-print(name_a)
-print(art.vs)
-print(name_b)
+while game_should_continue :
+    account_a = account_b
+    account_b = random.choice(game_data.data)
+    if account_a == account_b:
+        account_b = random.choice(game_data.data)
 
-def followers_checker(a, b):
-    if a > b:
-        return "a"
+    print(art.logo)
+    print(f"Compare A : {format_data(account_a)}")
+    print(art.vs)
+    print(f" Against B : {format_data(account_b)}")
+
+    guess =  str(input("Who has more Instagram Followers ? A / B ")).lower()
+    print("\n " *20 )
+    print(art.logo)
+
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+    if is_correct:
+        print("You are Right!")
+        score += 1
+        print(f"Your Score is : {score}")
     else:
-        return "b"
-
-result_followers = followers_checker(followers_a,followers_b)
-
-print(result_followers)
-
-def user_choice(which):
-    if which == result_followers :
-        if result_followers == "a":
-            print(f"You are Right {name_a} has more followers {followers_a}")
-        else:
-            print(f"You are Right {name_b} has more followers {followers_b}")
-    else:
-        print("You are wrong")
-
-user_choice(which = str(input("Who has more Instagram Followers ? A / B ")).lower())
+        print("Wrong Answer!")
+        print(f"Your Final Score is {score}")
+        game_should_continue = False
