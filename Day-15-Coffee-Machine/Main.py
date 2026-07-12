@@ -29,4 +29,27 @@ resources = {
     "milk": 200,
     "coffee": 100,
 }
-# TODO Make the resources
+money = 0
+user_choice = str(input("What would you like? ( espresso / latte / cappuccino ) :")).lower()
+if user_choice == "report":
+    #The report Section
+    print(f"Water: {resources['water']}ml")
+    print(f"Milk: {resources['milk']}ml")
+    print(f"Coffee: {resources['coffee']}g")
+    print(f"Money : {money}$")
+
+quarters = int(input("Please Enter quarters : ")) * 0.25
+dimes = int(input("Please Enter dimes : ")) * 0.10
+nickles = int(input("Please Enter nickles : ")) * 0.05
+pennies = int(input("Please Enter pennies : ")) * 0.01
+total_coins = quarters+ dimes + nickles + pennies
+print(quarters)
+print(dimes)
+print(nickles)
+print(pennies)
+print(total_coins)
+
+# TODO check resources sufficient
+# TODO process coins
+# TODO check transaction successful?
+# TODO make the coffee
