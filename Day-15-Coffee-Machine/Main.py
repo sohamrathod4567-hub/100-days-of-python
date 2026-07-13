@@ -43,11 +43,8 @@ dimes = int(input("Please Enter dimes : ")) * 0.10
 nickles = int(input("Please Enter nickles : ")) * 0.05
 pennies = int(input("Please Enter pennies : ")) * 0.01
 total_coins = quarters+ dimes + nickles + pennies
-print(quarters)
-print(dimes)
-print(nickles)
-print(pennies)
-print(total_coins)
+
+
 
 # TODO check resources sufficient
 # TODO process coins
