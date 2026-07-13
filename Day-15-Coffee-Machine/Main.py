@@ -39,7 +39,7 @@ def make_coffee(drink):
 def coffee_money(cost,choice,sel_drink):
     """This function will take the coins from the user and check if it is enough to make the coffee"""
     quarters = int(input("Please Enter quarters : ")) * 0.25
-    dimes = int(input("Please Enter dimes : ")) * 0.10
+    dimes = int(input("Please Enter dimes : ")) * 0.10          # This is the logic where the user will enter the coins and the total will be calculated and checked if it is enough to make the coffee
     nickles = int(input("Please Enter nickles : ")) * 0.05
     pennies = int(input("Please Enter pennies : ")) * 0.01
     total_coins = quarters + dimes + nickles + pennies
