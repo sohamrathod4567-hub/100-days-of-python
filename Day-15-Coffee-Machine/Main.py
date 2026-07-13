@@ -1,3 +1,4 @@
+import art
 MENU = {
     "espresso": {
         "ingredients": {
@@ -65,7 +66,7 @@ def report():
     print(f"Money : ${money}")
 while machine_on:
     """This is the main loop of the coffee machine program. It will keep running until the user turns off the machine."""
-
+    print(art.logo)
     user_choice = str(input("What would you like? ( espresso / latte / cappuccino ) :")).lower()
 
     if user_choice == "report":
