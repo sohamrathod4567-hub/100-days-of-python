@@ -32,10 +32,12 @@ resources = {
 money = 0
 machine_on = True
 def make_coffee(drink):
+    """This function will deduct the required ingredients from the resources"""
     for i in drink["ingredients"]:
         resources[i] -=  drink["ingredients"][i]
 
 def coffee_money(cost,choice,sel_drink):
+    """This function will take the coins from the user and check if it is enough to make the coffee"""
     quarters = int(input("Please Enter quarters : ")) * 0.25
     dimes = int(input("Please Enter dimes : ")) * 0.10
     nickles = int(input("Please Enter nickles : ")) * 0.05
@@ -55,12 +57,14 @@ def coffee_money(cost,choice,sel_drink):
 
 
 def report():
+    """This function will print the report of the resources and money"""
     #The report Section
     print(f"Water: {resources['water']}ml")
     print(f"Milk: {resources['milk']}ml")
     print(f"Coffee: {resources['coffee']}g")
     print(f"Money : ${money}")
 while machine_on:
+    """This is the main loop of the coffee machine program. It will keep running until the user turns off the machine."""
 
     user_choice = str(input("What would you like? ( espresso / latte / cappuccino ) :")).lower()
 
@@ -71,23 +75,16 @@ while machine_on:
         machine_on = False
         print("Thank You for choosing us")
         break
-
     if user_choice not in MENU:
         print("Invalid Choice")
         continue
     else:
         selected_drink = MENU[user_choice]
-    # print(selected_drink["ingredients"])
-    # print(selected_drink)
     can_make_coffee = True
     for ingredient in selected_drink["ingredients"]:
-        # print(ingredient)
-       # print(resources[ingredient]) # Available
-       #  print(selected_drink["ingredients"][ingredient]) # Required
         if selected_drink["ingredients"][ingredient] > resources[ingredient]:
             print(f"You do not have enough {ingredient} Sorry!!")
             can_make_coffee = False
             break
-
     if can_make_coffee:
         coffee_money(selected_drink["cost"],user_choice,selected_drink)
