@@ -7,7 +7,6 @@ def random_color():
     b = random.randint (0,255)
     color = ( r, g, b )
     return color
-angles = [0, 45, 90, 135, 180, 225, 270, 315]
 tim = Turtle()
 tim.speed("fastest")
 screen = Screen()
