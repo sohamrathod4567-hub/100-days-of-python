@@ -21,7 +21,7 @@ The program generates a fun band name by combining the name of the city where th
 3. Run the program:
 
 ```bash
-py main.py
+py try.py
 ```
 
 ## Example
