@@ -1,25 +1,20 @@
+from importlib import import_module
 from turtle import Turtle,Screen
 
-timmy_the_turtle = Turtle()
+tim = Turtle()
 
-timmy_the_turtle.shape("turtle")
-timmy_the_turtle.color("red")
-timmy_the_turtle.forward(100)
-timmy_the_turtle.color("blue")
-timmy_the_turtle.right(90)
-timmy_the_turtle.forward(100)
-timmy_the_turtle.color("green")
-timmy_the_turtle.right(90)
-timmy_the_turtle.forward(100)
-timmy_the_turtle.color("yellow")
-timmy_the_turtle.right(90)
-timmy_the_turtle.forward(100)
-
-
-
-
-
-
+tim.shape("turtle")
+tim.color("red")
+tim.forward(100)
+tim.color("blue")
+tim.right(90)
+tim.forward(100)
+tim.color("green")
+tim.right(90)
+tim.forward(100)
+tim.color("yellow")
+tim.right(90)
+tim.forward(100)
 
 screen = Screen()
 screen.exitonclick()
