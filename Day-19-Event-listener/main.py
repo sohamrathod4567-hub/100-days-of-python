@@ -6,8 +6,8 @@ screen = Screen()
 screen.setup(width=500, height=400)
 user_bet = screen.textinput(title="Make your Bet" , prompt=" Which turtle will win the race? Enter a color : ")
 print(f"Your choice is : {user_bet}")
-colors = ["red" , "orange" , "yellow", "blue" , "purple" , "green"]
-y_positions = [-70 , - 40 , -10 , 20 , 50 , 80 ]
+colors = ["red" , "orange" , "yellow", "blue" , "purple" , "green" , "black" , "gray"]
+y_positions = [-70 , - 40 , -10 , 20 , 50 , 80 , 120, 150 ]
 all_turtles = []
 for turtle_index in range(len(colors)):
     new_turtle = Turtle(shape="turtle")
