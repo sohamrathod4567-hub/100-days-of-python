@@ -13,7 +13,7 @@ def move_back():
     tim.back(20)
 def clear():
     tim.penup()
-    tim.goto(0,0)
+    tim.home()
     tim.pendown()
     tim.clear()
 
