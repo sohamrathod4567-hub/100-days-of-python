@@ -32,7 +32,10 @@ while game_is_on:
         print("Nom nom nom")
         score.increase()
 
-
+    #Detect collision with wall
+    if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() < -290 or snake.head.ycor() > 290:
+        game_is_on = False
+        score.game_over()
 
 
 
