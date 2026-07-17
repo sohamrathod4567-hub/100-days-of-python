@@ -1,3 +1,4 @@
+from multiprocessing.spawn import set_executable
 from turtle import Turtle
 MOVE_DISTANCE = 20
 STARTING_POSITION = [(0, 0), (-20, 0), (-40, 0)]
@@ -19,4 +20,11 @@ class Snake:
             new_y = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(new_x, new_y)
         self.segments[0].forward(MOVE_DISTANCE)
-        self.segments[0].left(90)
+    def up(self):
+        self.segments[0].setheading(90)
+    def left(self):
+        self.segments[0].setheading(180)
+    def right(self):
+        self.segments[0].setheading(0)
+    def down(self):
+        self.segments[0].setheading(270)
