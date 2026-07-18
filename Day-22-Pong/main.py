@@ -1,4 +1,4 @@
-from turtle import Turtle, Screen
+from turtle import  Screen
 from paddle import Paddle
 from ball import Ball
 import time
@@ -29,6 +29,13 @@ while game_is_on:
 
     # detect collision with border
     if ball.ycor() > 285 or ball.ycor() < -285:
-        ball.bounce()
+        ball.bounce_y()
+    #collision with right paddle
+    if ball.distance(r_paddle) < 50 and ball.xcor() > 320 or ball.distance(l_paddle) < 50 and ball.xcor() < -320:
+      ball.bounce_x()
 
+    if ball.xcor() > 420:
+        ball.reset_position()
+    if ball.xcor() < -420:
+        ball.reset_position()
 screen.exitonclick()
