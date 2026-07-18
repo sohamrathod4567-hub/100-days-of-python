@@ -27,5 +27,8 @@ while game_is_on:
     screen.update()
     ball.move()
 
+    # detect collision with border
+    if ball.ycor() > 285 or ball.ycor() < -285:
+        ball.bounce()
 
 screen.exitonclick()
