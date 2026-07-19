@@ -1,5 +1,6 @@
 import time
 from turtle import Screen
+
 from player import Player
 from car_manager import CarManager
 import random
@@ -28,3 +29,11 @@ while game_is_on:
 
     if player.level_up():
         scoreboard.score_update()
+        cars.speed_up()
+
+    for car in cars.all_cars:
+        if car.distance(player) < 20:
+            scoreboard.gameover()
+            game_is_on = False
+
+screen.exitonclick()
