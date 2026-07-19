@@ -5,10 +5,12 @@ STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
 
 
-class CarManager():
+class CarManager:
     def __init__(self):
         self.all_cars = []
         self.move_cars()
+        self.starting_speed = STARTING_MOVE_DISTANCE
+        self.speedup = MOVE_INCREMENT
 
 
     def create_cars(self) :
@@ -23,6 +25,8 @@ class CarManager():
 
     def move_cars(self):
         for car in self.all_cars:
-            car.backward(STARTING_MOVE_DISTANCE)
+            car.backward(self.starting_speed)
 
 
+    def speed_up(self):
+        self.starting_speed += self.speedup
