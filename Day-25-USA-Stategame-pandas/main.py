@@ -14,13 +14,21 @@ turtle.shape(image)
 # turtle.onscreenclick(get_mouse_click_coor)
 # turtle.mainloop()
 #
-answer_state = screen.textinput(title="Guess the State", prompt="What is another State's name?").lower()
-
 data = pandas.read_csv("50_states.csv")
 all_states = data.state.to_list()
+guessed_states = []
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f" {len(guessed_states)} /50 States Correct", prompt="What is another State's name?").title()
 
-if  answer_state in all_states:
-    print("Correct!")
+
+    if  answer_state in all_states:
+        guessed_states.append(answer_state)
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        state_data = data[data.state == answer_state]
+        t.goto(state_data.x.item() , state_data.y.item())
+        t.write(answer_state, font=("Arial", 8, "bold"))
 
 
 
