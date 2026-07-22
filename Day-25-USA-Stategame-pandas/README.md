@@ -46,7 +46,7 @@ cd Day-25
 5. Run the program:
 
 ```bash
-python main.py
+python practice.py
 ```
 
 ---
