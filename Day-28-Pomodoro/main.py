@@ -43,5 +43,9 @@ start.grid(row=2,column=0)
 reset = Button(text="Reset" , font=(FONT_NAME , 9 , "bold"))
 reset.grid(row=2,column=2)
 
+#check mark
+check_mark = Label(text= "✔",bg=YELLOW,fg=GREEN,font=(FONT_NAME,15))
+check_mark.grid(row=3,column=1)
+
 
 window.mainloop()
