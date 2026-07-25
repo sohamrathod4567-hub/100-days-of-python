@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -6,12 +7,19 @@ def save():
     website = website_entry.get()
     uname = uname_entry.get()
     password = password_entry.get()
-    f = open("data.txt", "a")
-    f.write(f"\n {website} | {uname} | {password}")
-    f.close()
 
-    website_entry.delete(0, END)
-    password_entry.delete(0, END)
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showwarning(title="Warning",message="Please enter all details ")
+
+    else:
+        is_ok = messagebox.askokcancel(title=website,message=f"These are the details entered :\n Email: {uname} \n Password :  {password}\n is it okay to save")
+        if is_ok:
+            f = open("data.txt", "a")
+            f.write(f"\n {website} | {uname} | {password}")
+            f.close()
+
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -57,6 +65,7 @@ password_entry.grid(row=3, column=1,sticky="w")
 
 generate_password = Button(text="Generate Password")
 generate_password.grid(row=3, column=2,sticky="w")
+
 add = Button(text="Add",width=36 , command=save)
 add.grid(row=4, column=1, columnspan=2,sticky="w")
 
