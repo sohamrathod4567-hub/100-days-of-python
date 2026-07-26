@@ -66,6 +66,15 @@ def save():
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
+def find_password():
+    website = website_entry.get()
+    with open ("data.json", "r") as file:
+       data = json.load(file)
+       if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website , message=f" Email : {email} \n Password : {password}")
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -114,6 +123,8 @@ generate_password.grid(row=3, column=2,sticky="w")
 add = Button(text="Add",width=36 , command=save)
 add.grid(row=4, column=1, columnspan=2,sticky="w")
 
+search = Button(text="Search",command=find_password)
+search.grid(row=1, column=2 )
 
 
 window.mainloop()
