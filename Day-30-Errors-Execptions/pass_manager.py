@@ -49,9 +49,20 @@ def save():
         messagebox.showwarning(title="Warning",message="Please enter all details ")
 
     else:
-       with open("data.json", "w") as file:
-            json.dump(new_data, file , indent=4)
-
+        try:
+            with open("data.json", "r") as file:
+                #Reading old data
+                data = json.load(file)
+                #Updating data
+                data.update(new_data)
+        except FileNotFoundError:
+            with open("data.json", "w") as file:
+               json.dump(new_data, file , indent=4)
+        else:
+            with open("data.json", "w") as file:
+                #writing new data to old file
+                json.dump(data, file , indent=4)
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
