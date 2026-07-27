@@ -4,11 +4,15 @@ import random
 
 
 BACKGROUND_COLOR = "#B1DDC6"
-
-
-data = pandas.read_csv("data/french_words.csv")
-to_learn = data.to_dict(orient="records")
 current_card ={}
+to_learn = {}
+try :
+    data = pandas.read_csv("data/yet_to_words.csv")
+except FileNotFoundError:
+    original_data = pandas.read_csv("data/french_words.csv")
+    to_learn = original_data.to_dict(orient= "records")
+else:
+    to_learn = data.to_dict(orient="records")
 
 def next_card():
     global current_card , flip_timer
@@ -26,6 +30,14 @@ def translation():
     card_canvas.itemconfig(card_title, text = "English",fill="white")
     card_canvas.itemconfig(canvas_img, image = back_image)
     card_canvas.itemconfig(card_word, text = current_card["English"],fill ="white")
+
+
+def is_known():
+    to_learn.remove(current_card)
+    pandas.DataFrame(to_learn).to_csv("data/yet_to_words.csv")
+
+
+    next_card()
 
 
 
@@ -52,7 +64,7 @@ unknown_button = Button(image=cross_image,command= next_card )
 unknown_button.grid(row=1, column=0)
 
 right_image = PhotoImage(file="images/right.png")
-known_button = Button(image=right_image , command= next_card )
+known_button = Button(image=right_image , command= is_known )
 known_button.grid(row=1, column=1)
 
 next_card()
