@@ -34,7 +34,7 @@ def translation():
 
 def is_known():
     to_learn.remove(current_card)
-    pandas.DataFrame(to_learn).to_csv("data/yet_to_words.csv")
+    pandas.DataFrame(to_learn).to_csv("data/yet_to_words.csv" , index=False)
 
 
     next_card()
