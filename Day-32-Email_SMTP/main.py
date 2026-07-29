@@ -2,7 +2,7 @@ import datetime as dt
 import smtplib
 import random
 import pandas as pd
-TODAY = (7,28)
+TODAY = (7,29)
 MY_EMAIL = "db9695733@gmail.com"
 MY_PASSWORD = "zxlkdltjlglbsjij"
 
@@ -19,10 +19,10 @@ if TODAY in birthdays_dict:
         contents = letter_file.read()
         contents.replace("[NAME]",birthday_person["name"])
 
-    with smtplib.SMTP("smtp.gmail.com",465) as connection:
+    with smtplib.SMTP("smtp.gmail.com",587) as connection:
         connection.starttls()
         connection.login(MY_EMAIL , MY_PASSWORD)
-
-
-
-
+        connection.sendmail(from_addr=MY_EMAIL,
+                            to_addrs=birthday_person["email"],
+                            msg= f"Subject :Happy Birthday!\n\n{contents}"
+                            )
