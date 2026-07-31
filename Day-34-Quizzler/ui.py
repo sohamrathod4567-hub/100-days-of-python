@@ -1,5 +1,5 @@
 from tkinter import *
-
+from quiz_brain import QuizBrain
 from PIL.ImageOps import pad
 
 THEME_COLOR = "#375362"
@@ -7,7 +7,8 @@ FONT = ("Arial" , 20 , "italic")
 
 class QuizInterface:
 
-    def __init__(self):
+    def __init__(self,quiz_brain:QuizBrain ):
+        self.quiz = quiz_brain
         # Made the window
         self.window = Tk()
         self.window.title("Quizzler")
@@ -20,7 +21,13 @@ class QuizInterface:
 
         # This is for the canvas
         self.canvas = Canvas(width=250, height=300, bg="white")
-        self.canvas.create_text( 125 ,  150, text = "Pablo" , font= FONT)
+        self.question_text = self.canvas.create_text(
+            125 ,
+            150 ,
+            text = "Pablo" ,
+            font= FONT ,
+            width= 230
+        )
         self.canvas.grid(row=1, column=0,columnspan=2,pady=50)
 
 
@@ -33,5 +40,10 @@ class QuizInterface:
         self.wrong = Button(image=wrong_img , highlightthickness=0)
         self.wrong.grid(row=2, column=1)
 
+        self.get_next_question()
+
 
         self.window.mainloop()
+    def get_next_question(self):
+        q_text = self.quiz.next_question()
+        self.canvas.itemconfig(self.question_text, text=q_text)
