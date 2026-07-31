@@ -13,8 +13,8 @@ class QuizInterface:
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
 
         # The Text label
-        self.text = Label(text="Score : 0",bg=THEME_COLOR,fg="white" , font=("Arial" , 10 , "bold"))
-        self.text.grid(row=0, column=1)
+        self.score = Label(text="Score : 0",bg=THEME_COLOR,fg="white" , font=("Arial" , 10 , "bold"))
+        self.score.grid(row=0, column=1)
 
 
         # This is for the canvas
@@ -46,8 +46,13 @@ class QuizInterface:
 
     def get_next_question(self):
         self.canvas.configure(background="white")
-        q_text = self.quiz.next_question()
-        self.canvas.itemconfig(self.question_text, text=q_text)
+        if self.quiz.still_has_questions():
+            q_text = self.quiz.next_question()
+            self.canvas.itemconfig(self.question_text, text=q_text)
+        else:
+            self.canvas.itemconfig(self.question_text, text="That is the end of your Quiz \n Thank you!")
+            self.right.config(state="disabled")
+            self.wrong.config(state="disabled")
 
     def is_true(self):
         self.give_feedback(self.quiz.check_answer("True"))
@@ -58,6 +63,7 @@ class QuizInterface:
     def give_feedback(self , check):
         if check:
             self.canvas.config(bg="green")
+            self.score.config(text=f"Score: {self.quiz.score}")
         else:
             self.canvas.config(bg="red")
         self.window.after(1000 , self.get_next_question)
