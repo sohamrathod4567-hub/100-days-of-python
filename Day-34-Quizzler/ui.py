@@ -1,7 +1,5 @@
 from tkinter import *
 from quiz_brain import QuizBrain
-from PIL.ImageOps import pad
-
 THEME_COLOR = "#375362"
 FONT = ("Arial" , 20 , "italic")
 
@@ -33,17 +31,34 @@ class QuizInterface:
 
         #Right and Wrong Button
         right_img = PhotoImage(file="Images/true.png")
-        self.right = Button(image=right_img , highlightthickness=0)
+        self.right = Button(image=right_img , highlightthickness=0 , command= self.is_true)
         self.right.grid(row=2, column=0)
 
         wrong_img = PhotoImage(file="Images/false.png")
-        self.wrong = Button(image=wrong_img , highlightthickness=0)
+        self.wrong = Button(image=wrong_img , highlightthickness=0 , command= self.is_false)
         self.wrong.grid(row=2, column=1)
 
         self.get_next_question()
 
 
         self.window.mainloop()
+
+
     def get_next_question(self):
+        self.canvas.configure(background="white")
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question_text, text=q_text)
+
+    def is_true(self):
+        self.give_feedback(self.quiz.check_answer("True"))
+
+    def is_false(self):
+        self.give_feedback(self.quiz.check_answer("False"))
+
+    def give_feedback(self , check):
+        if check:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(1000 , self.get_next_question)
+
