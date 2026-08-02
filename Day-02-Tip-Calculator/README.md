@@ -23,7 +23,7 @@ The program calculates how much each person should pay when splitting a bill, in
 3. Run the program:
 
 ```bash
-py main.py
+py try.py
 ```
 
 ## Example
