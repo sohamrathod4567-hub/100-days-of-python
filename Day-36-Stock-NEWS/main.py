@@ -1,5 +1,4 @@
 import requests
-from twilio.rest.api.v2010.account.usage.record import yesterday
 
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -26,6 +25,7 @@ news_parameters = {
 stock_response = requests.get(STOCK_ENDPOINT, params=stock_parameters)
 stock_response.raise_for_status()
 stock_response_json = stock_response.json()
+print(stock_response_json)
 data = stock_response_json["Time Series (Daily)"]
 
 
@@ -54,5 +54,8 @@ if diff_percent > 0.5:
     news_response = requests.get(NEWS_ENDPOINT, params=news_parameters)
     articles = news_response_json = news_response.json()["articles"]
     three_articles = articles[0:3]  # used the slice function
-    print(three_articles)
 
+
+
+    formatted_articles = [f"HeadLine:{article['title']}. \n Brief: {article['description']}." for article in three_articles]
+    print(formatted_articles)
