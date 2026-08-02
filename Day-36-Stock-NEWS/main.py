@@ -1,7 +1,9 @@
 import requests
-
+import smtplib
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+MY_EMAIL = "db9695733@gmail.com"
+MY_PASSWORD = "zxlkdltjlglbsjij"
 
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 STOCK_API = "NYZHCZ7J7B1OUWZX"
@@ -59,3 +61,11 @@ if diff_percent > 0.5:
 
     formatted_articles = [f"HeadLine:{article['title']}. \n Brief: {article['description']}." for article in three_articles]
     print(formatted_articles)
+
+    with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+        connection.starttls()
+        connection.login(MY_EMAIL, MY_PASSWORD)
+        connection.sendmail(from_addr=MY_EMAIL,
+                            to_addrs="rathodsoham999@gmail.com",
+                            msg=f"{STOCK_NAME}:{diff_percent}  {formatted_articles[0]}"
+                            )
