@@ -1,4 +1,6 @@
 import requests
+from twilio.rest.api.v2010.account.usage.record import yesterday
+
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
@@ -18,9 +20,29 @@ stock_parameters = {
 stock_response = requests.get(STOCK_ENDPOINT, params=stock_parameters)
 stock_response.raise_for_status()
 stock_response_json = stock_response.json()
-# print(stock_response_json)
-opening_price = stock_response_json["Time Series (Daily)"]["2026-07-31"]["1. open"]
-closing_price = stock_response_json["Time Series (Daily)"]["2026-07-30"]["4. close"]
-print(closing_price)
-print(opening_price)
+data = stock_response_json["Time Series (Daily)"]
 
+
+# print(stock_response_json)
+# opening_price = stock_response_json["Time Series (Daily)"]["2026-07-31"]["1. open"]
+# closing_price = stock_response_json["Time Series (Daily)"]["2026-07-30"]["4. close"]
+# print(closing_price)
+# print(opening_price)
+
+
+data_list = [value for (key,value) in data.items()]
+yesterday_data = data_list[0]
+yesterday_closing_price = yesterday_data["4. close"]
+print(yesterday_closing_price)
+
+day_before_yesterday_data = data_list[1]
+day_before_yesterday_closing_price = day_before_yesterday_data["4. close"]
+print(day_before_yesterday_closing_price)
+
+difference = abs(float(yesterday_closing_price) - float(day_before_yesterday_closing_price))
+
+diff_percent = (difference / float(yesterday_closing_price))*100
+print(diff_percent)
+
+if diff_percent > 0.5:
+    print("Get News ")
