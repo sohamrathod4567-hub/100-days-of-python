@@ -21,9 +21,9 @@ if will_it_rain > 30:
     client = Client(account_sid , auth_token)
     message = client.messages \
         .create(
-        body= " It's Going to Rain Nigah",
-        from= "The Twilio Number",
-        to = "Your-number"
+        # body= " It's Going to Rain Nigah",
+        # from= "The Twilio Number",
+        # to = "Your-number"
 
     )
     print("Bring the Umbrella nigah")
