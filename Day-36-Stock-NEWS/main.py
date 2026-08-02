@@ -8,6 +8,7 @@ STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 STOCK_API = "NYZHCZ7J7B1OUWZX"
 
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
+NEWS_API = "3ad6fd44b5f148478a79d0d527d760ff"
 
 
 stock_parameters = {
@@ -15,6 +16,11 @@ stock_parameters = {
     "symbol":STOCK_NAME,
     "apikey":STOCK_API,
     "outputsize":"compact"
+}
+
+news_parameters = {
+    "apiKey":NEWS_API,
+    "qInTitle":COMPANY_NAME,
 }
 
 stock_response = requests.get(STOCK_ENDPOINT, params=stock_parameters)
@@ -45,4 +51,6 @@ diff_percent = (difference / float(yesterday_closing_price))*100
 print(diff_percent)
 
 if diff_percent > 0.5:
-    print("Get News ")
+    news_response = requests.get(NEWS_ENDPOINT, params=news_parameters)
+    articles = news_response_json = news_response.json()["articles"]
+    print(articles)
