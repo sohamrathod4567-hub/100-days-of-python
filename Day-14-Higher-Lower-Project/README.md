@@ -52,7 +52,7 @@ cd 100-days-of-python/Day-14
 3. Run the program:
 
 ```bash
-python main.py
+python try.py
 ```
 
 ---
