@@ -39,7 +39,7 @@ cd Day-13
 3. Run the Python file:
 
 ```bash
-python main.py
+python try.py
 ```
 
 ---
