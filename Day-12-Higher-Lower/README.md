@@ -36,7 +36,7 @@ After every incorrect guess, the game provides feedback indicating whether the g
 4. Run the program:
 
 ```bash
-python main.py
+python try.py
 ```
 
 ---
