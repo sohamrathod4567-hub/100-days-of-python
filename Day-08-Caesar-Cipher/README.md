@@ -41,7 +41,7 @@ On Day 8 of the **100 Days of Python** challenge, I built a **Caesar Cipher** ap
 3. Run the program:
 
    ```bash
-   python main.py
+   python try.py
    ```
 
 ---
