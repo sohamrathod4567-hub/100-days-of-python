@@ -43,7 +43,7 @@ Day-07-Hangman/
 3. Run the program:
 
 ```bash
-py main.py
+py try.py
 ```
 
 ## ASCII Art
