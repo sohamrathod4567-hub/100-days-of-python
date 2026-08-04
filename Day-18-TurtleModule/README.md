@@ -53,7 +53,7 @@ cd 100-days-of-python/Day-18-Turtle-Graphics
 3. Run the program.
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 ---
