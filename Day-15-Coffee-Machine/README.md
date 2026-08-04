@@ -61,7 +61,7 @@ cd Day-15
 3. Run the program.
 
 ```bash
-python main.py
+python try.py
 ```
 
 ---
