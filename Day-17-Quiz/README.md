@@ -59,7 +59,7 @@ cd 100-days-of-python/Day-17-Quiz-Game
 3. Run the program.
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 ---
