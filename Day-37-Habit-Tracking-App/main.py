@@ -48,7 +48,11 @@ pixel_update = {
 }
 pixel_update_endpoint = f"{pixel_endpoint}/{today}"
 
-# response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
-# print(response.text)
+response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
+print(response.text)
 
-response = requests.put(url=pixel_update_endpoint, headers = headers, json = pixel_update )
+# response = requests.put(url=pixel_update_endpoint, headers = headers, json = pixel_update )
+
+delete_endpoint = pixel_update_endpoint
+
+# response = requests.delete(url=delete_endpoint, headers=headers)
