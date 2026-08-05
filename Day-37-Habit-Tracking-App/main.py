@@ -40,7 +40,7 @@ today = datetime.now().strftime("%Y%m%d")
 
 pixel_config = {
     "date": today,
-    "quantity":"7"
+    "quantity": input("How Many Pages Have you READ today?")
 }
 
 pixel_update = {
