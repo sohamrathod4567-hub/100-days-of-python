@@ -1,4 +1,6 @@
 import requests
+from datetime import datetime
+
 
 # Link : https://pixe.la/v1/users/soham9/graphs/graph1.html   From here we can access the graph
 USERNAME = "soham9"
@@ -34,10 +36,11 @@ headers = {
 
 pixel_endpoint = f"{graph_endpoint}/{GRAPH_ID}"
 
+today = datetime.now()
+
 pixel_config = {
-    "date": "20260805",
+    "date": today.strftime("%Y%m%d"),
     "quantity":"7"
 }
-response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
-
-print(response.text)
+# response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
+# print(response.text)
