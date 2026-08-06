@@ -14,8 +14,14 @@ requests_cache.install_cache()
 from data_manager import DataManager
 SERP_API = os.getenv("SERP_API")
 
-sheet_data = DataManager()
-# pprint(sheet_data.prices)
+sheet_data = DataManager().get_destination_data()
+pprint(sheet_data)
 
-search = FlightSearch().check_flights()
-pprint(search)
+search = FlightSearch()
+flights = search.check_flights(
+    origin_city_code="LHR",
+    destination_city_code="CDG",
+    from_time=tomorrow,
+    to_time=six_month_from_today,
+)
+pprint(flights)
