@@ -23,3 +23,14 @@ class FlightSearch:
             "currency": "GBP",
             "api_key": self._api_key,
         }
+        response = requests.get(self.end_point, params=query)
+
+        if response.status_code != 200:
+            print(f"Check_flights() Response code : {response.status_code}")
+            return None
+
+        data = response.json()
+        if "error" in data :
+            print(f"API ERROR : {data['error']}")
+            return None
+        return data
