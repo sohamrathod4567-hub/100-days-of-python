@@ -4,8 +4,8 @@ from pprint import pprint
 from dotenv import load_dotenv
 from  datetime import datetime,timedelta
 
-tomorrow = datetime.today() + timedelta(days=1)
-six_month_from_today = datetime.today() + timedelta(days=182)
+tomorrow = datetime.today().date() + timedelta(days=1)
+six_month_from_today = datetime.today().date() + timedelta(days=182)
 
 load_dotenv()
 requests_cache.install_cache()
