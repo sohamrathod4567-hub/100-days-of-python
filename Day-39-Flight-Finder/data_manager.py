@@ -21,7 +21,7 @@ class DataManager:
         self.destination_data = data["prices"]
         return self.destination_data
 
-    def update_lowest_price(row_id, new_price):
+    def update_lowest_price(self,row_id, new_price):
         new_data = {
             "price": {
                 "lowestPrice": new_price
