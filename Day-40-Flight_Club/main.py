@@ -37,6 +37,15 @@ for destination in destination_data:
     cheapest_flight = find_cheapest_flight(flights , return_date=six_month_from_today)
     message.append(f"{destination['city']}: GBP {cheapest_flight.price}")
 
+    if cheapest_flight.price == "N/A":
+        flights = search.check_flights(
+            origin_city_code=ORIGIN_CITY_IATA,
+            destination_city_code=destination["iataCode"],
+            from_time=tomorrow,
+            to_time=six_month_from_today,
+            is_direct=False,
+        )
+
     if cheapest_flight.price != "N/A" and cheapest_flight.price < destination['lowestPrice']:
         message.append(f"Lower Price Flight found to {destination['city']}!!")
         sheet_data.update_lowest_price(destination["id"],cheapest_flight.price)
