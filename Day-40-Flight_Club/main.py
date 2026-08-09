@@ -51,3 +51,7 @@ for destination in destination_data:
         sheet_data.update_lowest_price(destination["id"],cheapest_flight.price)
 
 email = NotificationManager(message)
+
+customer_email = sheet_data.get_customer_emails()
+
+print(customer_email)

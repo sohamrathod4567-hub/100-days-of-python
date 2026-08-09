@@ -8,12 +8,14 @@ SHEETY_API_ENDPOINT = os.getenv("SHEETY_API")
 USERNAME = os.getenv("USER_NAME")
 PASSWORD = os.getenv("PASSWORD")
 AUTHORIZATION = HTTPBasicAuth(USERNAME, PASSWORD)
+SHEETY_USER_ENDPOINT = os.getenv("SHEETY_API_CUSTOMER")
 
 class DataManager:
     #This class is responsible for talking to the Google Sheet.
     def __init__(self):
 
         self.destination_data = {}
+        self.user_data = {}
     def get_destination_data(self):
         response = requests.get(url=SHEETY_API_ENDPOINT, auth=AUTHORIZATION)
         response.raise_for_status()
@@ -32,3 +34,9 @@ class DataManager:
             json=new_data,
             auth=AUTHORIZATION
         )
+    def get_customer_emails(self):
+        response = requests.get(url=SHEETY_USER_ENDPOINT, auth=AUTHORIZATION)
+        response.raise_for_status()
+        data = response.json()
+        self.user_data = data["formResponses1"][0]["eMail"]
+        return self.user_data
