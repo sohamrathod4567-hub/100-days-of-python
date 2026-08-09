@@ -1,9 +1,11 @@
 import os
 import smtplib
 from dotenv import load_dotenv
+from data_manager import DataManager
 load_dotenv()
 EMAIL = os.getenv("MY_EMAIL")
 PASSWORD = os.getenv("MY_PASSWORD")
+USER = DataManager().get_customer_emails()
 
 class NotificationManager:
     #This class is responsible for sending notifications with the deal flight details.
@@ -13,6 +15,6 @@ class NotificationManager:
                 connection.starttls()
                 connection.login(EMAIL, PASSWORD)
                 connection.sendmail(from_addr=EMAIL,
-                                    to_addrs="rathodsoham999@gmail.com",
+                                    to_addrs=USER,
                                     msg=f"Subject:Cheap Flight NotiFication \n \n  {body}"
                                     )
