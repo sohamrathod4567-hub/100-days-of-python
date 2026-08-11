@@ -48,7 +48,7 @@ cd Day-19
 4. Run the project:
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 ---
