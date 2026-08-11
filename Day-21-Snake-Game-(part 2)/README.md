@@ -30,7 +30,7 @@ In this part, I added the core gameplay mechanics by introducing food, snake gro
 3. Run:
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 ---
