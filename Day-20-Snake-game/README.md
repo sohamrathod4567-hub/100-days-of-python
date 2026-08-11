@@ -31,7 +31,7 @@ In this part, the focus was on building the foundation of the game. A snake was 
 3. Run:
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 ---
