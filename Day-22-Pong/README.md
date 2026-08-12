@@ -76,7 +76,7 @@ cd Day-22
 3. Run the game.
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 ---
