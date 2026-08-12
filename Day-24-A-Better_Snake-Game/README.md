@@ -52,7 +52,7 @@ I also built a **Mail Merge** project that automatically creates personalized le
 3. Run:
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 4. Play the game and beat your previous high score.
@@ -66,7 +66,7 @@ python main.py
 3. Run:
 
 ```bash
-python main.py
+python pandas_practice.py
 ```
 
 4. The program will generate personalized letters for every name.
