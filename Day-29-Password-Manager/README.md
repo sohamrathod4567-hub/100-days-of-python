@@ -43,7 +43,7 @@ The application now allows users to generate strong random passwords, automatica
 
 4. Run the application:
    ```bash
-   python main.py
+   python practice.py
    ```
 
 ---
