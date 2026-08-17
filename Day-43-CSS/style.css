@@ -1,13 +1,12 @@
-h1 {
-    color: #0af03f;
+ol{
+    margin-left: -40px;
+    margin-top: -20px;
+    list-style-position: inside;
 }
-/* h2{
-    color: red
-} */
-
-.red {
+.note {
     color: red;
 }
-#green {
-    color: green;
+#id-selector-demo{
+    color:green
+
 }
