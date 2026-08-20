@@ -17,7 +17,7 @@ all_anchor_tags = soup.find_all(name = "a")
 heading = soup.find(name = "h1" , id = "name")  # This is to find the
 print(heading)
 
-section_heading = soup.find(name="h3", class_=("heading"))
+section_heading = soup.find(name="h3", class_=("heading")) # This is Done using the Class
 print(section_heading)
 
 company_url = soup.select_one(selector="#name")
