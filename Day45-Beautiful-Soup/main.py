@@ -23,5 +23,5 @@ print(section_heading)
 company_url = soup.select_one(selector="#name") # This is done used selector
 print(company_url)
 
-headings = soup.select(".heading")
+headings = soup.select(".heading") # This is how headings is used
 print(headings)
