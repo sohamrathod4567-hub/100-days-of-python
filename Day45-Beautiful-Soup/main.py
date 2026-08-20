@@ -20,7 +20,7 @@ print(heading)
 section_heading = soup.find(name="h3", class_=("heading")) # This is Done using the Class
 print(section_heading)
 
-company_url = soup.select_one(selector="#name")
+company_url = soup.select_one(selector="#name") # This is done used selector
 print(company_url)
 
 headings = soup.select(".heading")
