@@ -14,7 +14,7 @@ all_anchor_tags = soup.find_all(name = "a")
 #     # print(tag.getText())
 #     print(tag.get("href"))
 
-heading = soup.find(name = "h1" , id = "name")
+heading = soup.find(name = "h1" , id = "name")  # This is to find the
 print(heading)
 
 section_heading = soup.find(name="h3", class_=("heading"))
