@@ -15,5 +15,10 @@ movies= []
 for title in movie_titles:
     movies.append(title.text)
 
+
+
+
 movies.reverse()
 print(movies)
+with open('movies.txt', 'w', encoding="utf-8") as file:
+    file.write("\n".join(movies))
