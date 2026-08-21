@@ -6,9 +6,17 @@ yc_web_pages = response.text
 
 soup = BeautifulSoup(yc_web_pages, "html.parser")
 print(soup.title)
-article_tag = soup.find(name="span",class_ ="titleline")
-print(article_tag)
-article_text = article_tag.getText()
-article_link = article_tag.get("href")
-article_upvote = soup.find("span",class_="score").getText()
-print(article_upvote)
+articles = soup.find_all(name="span",class_ ="titleline")
+article_texts = []
+article_links = []
+for article_tag in articles:
+
+    article_text = article_tag.getText()
+    article_texts.append(article_text)
+    article_link = article_tag.get("href")
+    article_links.append(article_link)
+
+article_upvotes = soup.find_all("span",class_="score").getText()
+print(article_texts)
+print(article_links)
+print(article_upvotes)
