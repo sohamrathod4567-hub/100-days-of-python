@@ -8,4 +8,4 @@ response = requests.get(URL)
 bill_bord_web_page = response.text
 print(bill_bord_web_page)
 
-# soup = BeautifulSoup.text
+soup = BeautifulSoup(bill_bord_web_page, "html.parser")
