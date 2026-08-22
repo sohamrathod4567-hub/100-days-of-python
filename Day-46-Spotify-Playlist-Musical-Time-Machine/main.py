@@ -9,5 +9,11 @@ bill_bord_web_page = response.text
 # print(bill_bord_web_page)
 
 soup = BeautifulSoup(bill_bord_web_page, "html.parser")
-song_titles=soup.find(name="h3",class_="chart-entry__title")
-print(song_titles)
+song_titles=soup.find_all(name="h3",class_="chart-entry__title")
+# print(song_titles)
+song_list=[]
+
+for song in song_titles:
+    song_list.append(song.text)
+
+print(song_list)
