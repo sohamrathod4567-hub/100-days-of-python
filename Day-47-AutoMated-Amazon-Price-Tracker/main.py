@@ -1,6 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
+import smtplib
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+MY_EMAIL = os.getenv("USERNAME")
+MY_PASSWORD = os.getenv("PASSWORD")
 URL = "https://appbrewery.github.io/instant_pot/"
+TARGET_PRICE = 100
 
 response = requests.get(URL)
 product_web_page = response.text
@@ -9,3 +18,11 @@ soup = BeautifulSoup(product_web_page, "html.parser")
 price = soup.find(name="span", class_="a-price-whole").get_text(strip=True)
 price = float(price.replace(".", ""))
 print(price)
+
+with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+    connection.starttls()
+    connection.login(MY_EMAIL, MY_PASSWORD)
+    connection.sendmail(from_addr=MY_EMAIL,
+                        to_addrs="rathodsoham999@gmail.com",
+                        msg=f"Subject :Price Drop alert!\n\n Hello there , hope you are having a great day, the product which you wanted to buy from a really long time has a price drop , check it out over here {URL}"
+                        )
