@@ -1,4 +1,3 @@
-from pip._internal.operations.build import build_tracker
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
