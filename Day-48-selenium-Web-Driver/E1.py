@@ -7,8 +7,13 @@ chrome_options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.python.org")
 
-whole_thing = driver.find_element(By.CLASS_NAME, value="shrubbery")
+event_times = driver.find_elements(By.CSS_SELECTOR, value=".event-widget time")
+event_names = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li a ")
 
-print(whole_thing.text)
+for name in event_names:
+    print(name.text)
+
+for time in event_times:
+    print(time.text)
 
 driver.quit()
