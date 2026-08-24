@@ -1,3 +1,4 @@
+from pip._internal.operations.build import build_tracker
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -15,5 +16,8 @@ driver.get("https://www.python.org")
 
 search_bar = driver.find_element(By.NAME, value="q")
 print(search_bar.get_attribute("placeholder"))
+
+button = driver.find_element(By.ID,value="submit")
+print(button.size)
 # driver.close()
 driver.quit()
