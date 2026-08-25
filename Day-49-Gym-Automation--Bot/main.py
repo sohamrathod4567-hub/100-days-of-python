@@ -1,4 +1,5 @@
 import os
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -26,3 +27,10 @@ login_password.send_keys(ACCOUNT_PASSWORD)
 
 submit_btn = driver.find_element(By.ID, "submit-button")
 submit_btn.click()
+
+time.sleep(5)
+book_first = driver.find_element(By.ID, "book-button-spin-2026-08-25-1800")
+book_first.click()
+
+my_bookings = driver.find_element(By.ID, "my-bookings-link")
+my_bookings.click()
