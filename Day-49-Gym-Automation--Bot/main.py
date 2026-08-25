@@ -32,5 +32,8 @@ time.sleep(5)
 book_first = driver.find_element(By.ID, "book-button-spin-2026-08-25-1800")
 book_first.click()
 
+book_name = driver.find_element(By.ID, "class-name-spin-2026-08-25-1800")
+print(f"The class : {book_name.text} added to Waitlist")
+
 my_bookings = driver.find_element(By.ID, "my-bookings-link")
 my_bookings.click()
