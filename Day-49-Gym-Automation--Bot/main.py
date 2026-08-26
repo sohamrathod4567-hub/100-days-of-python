@@ -1,21 +1,25 @@
-import os
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+import os
 
 ACCOUNT_EMAIL= "rathodsoham999@gmail.com"
 ACCOUNT_PASSWORD ="9879915801"
 GYM_URL ="https://appbrewery.github.io/gym/"
+
+#Here The webDriver launches
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
 
-user_data_dir = os.path.join(os.getcwd(), "chrome_profile")
 
+user_data_dir = os.path.join(os.getcwd(), "chrome_profile")
 chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
 
 driver = webdriver.Chrome(options=chrome_options)
 driver.get(GYM_URL)
 
+wait = WebDriverWait(driver, 2)
 login_button = driver.find_element(By.ID, "login-button")
 login_button.click()
 
@@ -27,8 +31,8 @@ login_password.send_keys(ACCOUNT_PASSWORD)
 
 submit_btn = driver.find_element(By.ID, "submit-button")
 submit_btn.click()
+wait.until(ec.presence_of_element_located((By.ID, "schedule-page")))
 
-time.sleep(5)
 book_first = driver.find_element(By.ID, "book-button-spin-2026-08-25-1800")
 book_first.click()
 
