@@ -12,7 +12,7 @@ GYM_URL ="https://appbrewery.github.io/gym/"
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
 
-
+#From here, your chrome profile gets saved in your file path
 user_data_dir = os.path.join(os.getcwd(), "chrome_profile")
 chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
 
