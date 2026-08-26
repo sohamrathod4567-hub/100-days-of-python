@@ -6,7 +6,7 @@ import os
 
 ACCOUNT_EMAIL= "rathodsoham999@gmail.com"      #Credentials which are used to log in to the gym page.
 ACCOUNT_PASSWORD ="9879915801"
-GYM_URL ="https://appbrewery.github.io/gym/"  #The actual Gym URL
+GYM_URL ="https://appbrewery.github.io/gym/"  #The actual Gym URL( it is a static website for practice purposes 
 
 #This keeps our browser open
 chrome_options = webdriver.ChromeOptions()
