@@ -4,11 +4,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 import os
 
-ACCOUNT_EMAIL= "rathodsoham999@gmail.com"
+ACCOUNT_EMAIL= "rathodsoham999@gmail.com"      #Credentials which are used to log in to the gym page.
 ACCOUNT_PASSWORD ="9879915801"
-GYM_URL ="https://appbrewery.github.io/gym/"
+GYM_URL ="https://appbrewery.github.io/gym/"  #The actual Gym URL
 
-#Here The webDriver launches
+#This keeps our browser open
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
 
@@ -16,6 +16,7 @@ chrome_options.add_experimental_option("detach",True)
 user_data_dir = os.path.join(os.getcwd(), "chrome_profile")
 chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
 
+#The Driver
 driver = webdriver.Chrome(options=chrome_options)
 driver.get(GYM_URL)
 
