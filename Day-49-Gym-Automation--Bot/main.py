@@ -56,3 +56,8 @@ for card in class_cards:
                 # Book the class
                 button.click()
                 print(f"✓ Successfully booked: {class_name} on {day_title}")
+            elif button.text == "Join Waitlist":
+                # Join waitlist if class is full
+                button.click()
+                print(f"✓ Joined waitlist for: {class_name} on {day_title}")
+            break
