@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common import NoSuchDriverException, NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -80,7 +81,7 @@ for card in class_cards:
                 print(f"✓ Joined waitlist for: {class_name} on {day_title}")
                 WAITLIST_JOINED+=1
                 processed_classes.append(f"[New Waitlisted] {class_info}")
-            
+
 print(f"Classes Booked : {CLASS_BOOKED}")
 print(f"Waitlist Joined : {WAITLIST_JOINED}")
 print(f"Already booked/waitlisted : {ALREADY_BOOKED_WAITLISTED}")
@@ -90,5 +91,40 @@ print("\n--- DETAILED CLASS LIST ---")
 for class_detail in processed_classes:
     print(f"  • {class_detail}")
 
+total_booked = ALREADY_BOOKED_WAITLISTED + CLASS_BOOKED + WAITLIST_JOINED
+print(f"\n--- Total Tuesday/Thursday 6pm classes: {total_booked} ---")
+
+print("\n--- VERIFYING ON MY BOOKINGS PAGE ---")
+
 my_bookings = driver.find_element(By.ID, "my-bookings-link")
 my_bookings.click()
+
+# Wait for My Bookings page to load
+wait.until(ec.presence_of_element_located((By.ID, "my-bookings-page")))
+
+# Count all Tuesday/Thursday 6pm bookings
+verified_count = 0
+
+# Find ALL booking cards (both confirmed and waitlist)
+all_cards = driver.find_elements(By.CSS_SELECTOR, "div[id*='card-']")
+for card in all_cards:
+    try:
+        when_paragraph = card.find_element(By.XPATH, ".//p[strong[text()='When:']]")
+        when_text = when_paragraph.text
+        #Check if it is tue or thu 6:00 class
+        if ("Tue" in when_text or "Thu" in when_text) and "6:00 PM" in when_text:
+            class_name = card.find_element(By.TAG_NAME, "h3").text
+            print(f"  ✓ Verified: {class_name}")
+            verified_count += 1
+    except NoSuchElementException:
+        pass
+
+# Simple comparison
+print(f"\n--- VERIFICATION RESULT ---")
+print(f"Expected: {total_booked} bookings")
+print(f"Found: {verified_count} bookings")
+
+if total_booked == verified_count:
+    print("✅ SUCCESS: All bookings verified!")
+else:
+    print(f"❌ MISMATCH: Missing {total_booked - verified_count} bookings")
