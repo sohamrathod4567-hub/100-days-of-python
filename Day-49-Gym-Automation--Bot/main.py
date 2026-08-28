@@ -90,3 +90,6 @@ print(f"Already booked/waitlisted : {ALREADY_BOOKED_WAITLISTED}")
 print("\n--- DETAILED CLASS LIST ---")
 for class_detail in processed_classes:
     print(f"  • {class_detail}")
+
+my_bookings = driver.find_element(By.ID, "my-bookings-link")
+my_bookings.click()
