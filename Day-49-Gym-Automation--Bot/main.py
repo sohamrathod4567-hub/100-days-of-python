@@ -80,8 +80,7 @@ for card in class_cards:
                 print(f"✓ Joined waitlist for: {class_name} on {day_title}")
                 WAITLIST_JOINED+=1
                 processed_classes.append(f"[New Waitlisted] {class_info}")
-            break
-
+            
 print(f"Classes Booked : {CLASS_BOOKED}")
 print(f"Waitlist Joined : {WAITLIST_JOINED}")
 print(f"Already booked/waitlisted : {ALREADY_BOOKED_WAITLISTED}")
