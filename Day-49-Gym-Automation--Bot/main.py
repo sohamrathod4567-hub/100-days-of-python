@@ -50,3 +50,5 @@ for card in class_cards:
             # Check if already booked
             if button.text == "Booked":
                 print(f"✓ Already booked: {class_name} on {day_title}")
+            elif button.text == "Waitlisted":
+                print(f"✓ Already on waitlist: {class_name} on {day_title}")
