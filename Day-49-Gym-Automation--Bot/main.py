@@ -29,6 +29,7 @@ wait = WebDriverWait(driver, 2)
 login_button = driver.find_element(By.ID, "login-button")
 login_button.click()
 
+wait.until(ec.presence_of_element_located((By.NAME, "email")))
 
 login_email = driver.find_element(By.NAME, "email")
 login_email.send_keys(ACCOUNT_EMAIL)
