@@ -36,3 +36,10 @@ submit_btn.click()
 wait.until(ec.presence_of_element_located((By.ID, "schedule-page")))
 
 class_cards = driver.find_elements(By.CSS_SELECTOR,"div[id^='class-card-']")
+
+for card in class_cards:
+    day_group = card.find_element(By.XPATH, "./ancestor::div[contains(@id, 'day-group-')]" )
+    day_title = day_group.find_element(By.TAG_NAME , "h2").text
+
+    if "Tue" in day_title:
+        time_text = card.find_element(By.CSS_SELECTOR, "p[id^='class-time-']").text
