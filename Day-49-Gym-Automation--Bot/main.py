@@ -8,6 +8,10 @@ ACCOUNT_EMAIL= "rathodsoham999@gmail.com"      #Credentials which are used to lo
 ACCOUNT_PASSWORD ="9879915801"
 GYM_URL ="https://appbrewery.github.io/gym/"  #The actual Gym URL( it is a static website for practice purposes
 
+CLASS_BOOKED = 0
+WAITLIST_JOINED = 0
+ALREADY_BOOKED_WAITLISTED = 0
+
 #This keeps our browser open
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
@@ -25,6 +29,7 @@ wait = WebDriverWait(driver, 2)
 login_button = driver.find_element(By.ID, "login-button")
 login_button.click()
 
+
 login_email = driver.find_element(By.NAME, "email")
 login_email.send_keys(ACCOUNT_EMAIL)
 
@@ -33,6 +38,7 @@ login_password.send_keys(ACCOUNT_PASSWORD)
 
 submit_btn = driver.find_element(By.ID, "submit-button")
 submit_btn.click()
+
 wait.until(ec.presence_of_element_located((By.ID, "schedule-page")))
 
 class_cards = driver.find_elements(By.CSS_SELECTOR,"div[id^='class-card-']")
@@ -50,14 +56,22 @@ for card in class_cards:
             # Check if already booked
             if button.text == "Booked":
                 print(f"✓ Already booked: {class_name} on {day_title}")
+                ALREADY_BOOKED_WAITLISTED +=1
             elif button.text == "Waitlisted":
                 print(f"✓ Already on waitlist: {class_name} on {day_title}")
+                ALREADY_BOOKED_WAITLISTED+=1
             elif button.text == "Book Class":
                 # Book the class
                 button.click()
                 print(f"✓ Successfully booked: {class_name} on {day_title}")
+                CLASS_BOOKED +=1
             elif button.text == "Join Waitlist":
                 # Join waitlist if class is full
                 button.click()
                 print(f"✓ Joined waitlist for: {class_name} on {day_title}")
+                WAITLIST_JOINED+=1
             break
+
+print(f"Classes Booked : {CLASS_BOOKED}")
+print(f"Waitlist Joined : {WAITLIST_JOINED}")
+print(f"Already booked/waitlisted : {ALREADY_BOOKED_WAITLISTED}")
