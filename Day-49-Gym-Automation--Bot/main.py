@@ -46,3 +46,7 @@ for card in class_cards:
         if "6:00 PM" in time_text:
             class_name = card.find_element(By.CSS_SELECTOR, "h3[id^='class-name-']").text
             button = card.find_element(By.CSS_SELECTOR, "button[id^='book-button-']")
+
+            # Check if already booked
+            if button.text == "Booked":
+                print(f"✓ Already booked: {class_name} on {day_title}")
