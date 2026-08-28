@@ -21,6 +21,7 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get(GYM_URL)
 
 wait = WebDriverWait(driver, 2)
+
 login_button = driver.find_element(By.ID, "login-button")
 login_button.click()
 
@@ -34,11 +35,4 @@ submit_btn = driver.find_element(By.ID, "submit-button")
 submit_btn.click()
 wait.until(ec.presence_of_element_located((By.ID, "schedule-page")))
 
-book_first = driver.find_element(By.ID, "book-button-spin-2026-08-25-1800")
-book_first.click()
-
-book_name = driver.find_element(By.ID, "class-name-spin-2026-08-25-1800")
-print(f"The class : {book_name.text} added to Waitlist")
-
-my_bookings = driver.find_element(By.ID, "my-bookings-link")
-my_bookings.click()
+class_cards = driver.find_elements(By.CSS_SELECTOR,"div[id^='class-card-']")
