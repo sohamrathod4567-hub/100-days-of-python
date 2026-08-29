@@ -1,8 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 from selenium.webdriver.support import expected_conditions as ec
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from time import sleep
 
 EMAIL = "rathodsoham999@gmail.com"
 PASS = "123456789"
@@ -30,7 +32,7 @@ face_bark = wait.until(
 face_bark.click()
 
 # Switch to the Face_bark popup window
-time.sleep(2)
+sleep(2)
 base_window = driver.window_handles[0]
 face_bark_window = driver.window_handles[1]
 driver.switch_to.window(face_bark_window)
@@ -57,14 +59,31 @@ face_bark_btn.click()
 driver.switch_to.window(base_window)
 
 
-time.sleep(2)
+sleep(2)
 location_btn = driver.find_element(By.XPATH,"/html/body/main/div/div/form/button")
 location_btn.click()
 
 
 notifications = driver.find_element(By.XPATH,'/html/body/main/div/div/form/button[2]')
 notifications.click()
-time.sleep(2)
+sleep(2)
 
 cookies = driver.find_element(By.XPATH, '/html/body/main/div/div/form/button')
 cookies.click()
+
+for n in range(20):
+    sleep(1)
+    try:
+        like_button = driver.find_element(By.CLASS_NAME, value='btn-like')
+        like_button.click()
+    except ElementClickInterceptedException:
+        # Match popup is in the way — dismiss it and continue
+        try:
+            driver.find_element(By.CSS_SELECTOR, value='.match-popup a').click()
+        except NoSuchElementException:
+            sleep(2)
+    except NoSuchElementException:
+        # Like button not loaded yet OR all dogs have been swiped — wait and retry
+        sleep(2)
+
+driver.quit()
