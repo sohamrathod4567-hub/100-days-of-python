@@ -1,4 +1,3 @@
-from appier import PASSWORD
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -35,11 +34,37 @@ time.sleep(2)
 base_window = driver.window_handles[0]
 face_bark_window = driver.window_handles[1]
 driver.switch_to.window(face_bark_window)
-print(driver.title)
+# print(driver.title)
 
-# email_login = wait.until(
-#     ec.element_to_be_clickable(
-#         (By.ID, "email")
-#     )
-# )
-# email_login.send_keys(EMAIL)
+email_login = wait.until(
+    ec.element_to_be_clickable(
+        (By.ID, "email")
+    )
+)
+email_login.send_keys(EMAIL)
+
+pass_login = wait.until(
+    ec.element_to_be_clickable(
+        (By.ID, "pass")
+    )
+)
+pass_login.send_keys(PASS)
+
+face_bark_btn = driver.find_element(By.XPATH, "/html/body/div[2]/div/form/button")
+face_bark_btn.click()
+
+# This right here, gets out focus to the main( base ) window.
+driver.switch_to.window(base_window)
+
+
+time.sleep(2)
+location_btn = driver.find_element(By.XPATH,"/html/body/main/div/div/form/button")
+location_btn.click()
+
+
+notifications = driver.find_element(By.XPATH,'/html/body/main/div/div/form/button[2]')
+notifications.click()
+time.sleep(2)
+
+cookies = driver.find_element(By.XPATH, '/html/body/main/div/div/form/button')
+cookies.click()
