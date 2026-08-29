@@ -19,7 +19,10 @@ wait = WebDriverWait(driver, 2)
 log_in_btn = driver.find_element(By.XPATH , "/html/body/header/button")
 log_in_btn.click()
 
-wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="login-modal"]/div/div/div/button[1]')))
+face_bark = wait.until(
+    ec.element_to_be_clickable(
+        (By.XPATH, '//*[@id="login-modal"]/div/div/div/button[1]')
+    )
+)
 
-face_bark = driver.find_element(By.XPATH, '//*[@id="login-modal"]/div/div/div/button[1]')
 face_bark.click()
