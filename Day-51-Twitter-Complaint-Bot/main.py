@@ -15,27 +15,7 @@ PROMISED_DOWN = 50
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
 
-# #The Driver
-# driver = webdriver.Chrome(options=chrome_options)
-# driver.get(Y_URL)
-#
-# wait = WebDriverWait(driver, 2)
-#
-# y_sign_in_btn = wait.until(
-#   ec.element_to_be_clickable(
-#         (By.XPATH, '/html/body/div/p[2]/a')
-#     )
-# )
-# y_sign_in_btn.click()
-#
-# email = driver.find_element(By.NAME , "email")
-# email.send_keys(Y_EMAIL)
-#
-# password = driver.find_element(By.NAME , "password")
-# password.send_keys(Y_PASSWORD)
-#
-# sign_in = driver.find_element(By.XPATH, "/html/body/div/div/form/button")
-# sign_in.click()
+
 
 class InternetSpeedTwitterBot:
     def __init__(self):
@@ -61,10 +41,42 @@ class InternetSpeedTwitterBot:
         print(f"Your Down speed is :{self.down}")
         print(f"Your Up Speed is :{self.up}")
     def tweet_at_provider(self):
+        # The Driver
+        self.driver.get(Y_URL)
 
-        pass
+        wait = WebDriverWait(self.driver, 2)
+
+        y_sign_in_btn = wait.until(
+          ec.element_to_be_clickable(
+                (By.XPATH, '/html/body/div/p[2]/a')
+            )
+        )
+        y_sign_in_btn.click()
+
+        email = self.driver.find_element(By.NAME , "email")
+        email.send_keys(Y_EMAIL)
+
+        password = self.driver.find_element(By.NAME , "password")
+        password.send_keys(Y_PASSWORD)
+
+        sign_in = self.driver.find_element(By.XPATH, "/html/body/div/div/form/button")
+        sign_in.click()
+
+        content = wait.until(
+            ec.element_to_be_clickable(
+                (By.XPATH,'//*[@id="tweet-compose"]')
+            )
+        )
+        content.send_keys(f"I am Currently facing issues with my Wi-Fi, my provider said that I am gurenteed to have Up:{PROMISED_UP} and Down:{PROMISED_DOWN}, But as of right now I am having Up:{self.up} and {self.down}. Please do something about it.")
+
+        post = self.driver.find_element(By.ID, "post-btn")
+        post.click()
+        time.sleep(60)
+
+
+
 
 
 bot = InternetSpeedTwitterBot()
 bot.get_internet_speed()
-# bot.tweet_at_provider()
+bot.tweet_at_provider()
