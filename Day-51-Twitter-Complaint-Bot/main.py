@@ -24,3 +24,12 @@ y_sign_in_btn = wait.until(
     )
 )
 y_sign_in_btn.click()
+
+email = driver.find_element(By.NAME , "email")
+email.send_keys(Y_EMAIL)
+
+password = driver.find_element(By.NAME , "password")
+password.send_keys(Y_PASSWORD)
+
+sign_in = driver.find_element(By.XPATH, "/html/body/div/div/form/button")
+sign_in.click()
