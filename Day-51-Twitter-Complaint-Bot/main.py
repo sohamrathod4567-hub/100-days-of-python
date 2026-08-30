@@ -4,8 +4,23 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 
-X_URL = "https://x.com/home"
+Y_URL = "https://app.100daysofpython.dev/services/y/home"
+Y_EMAIL = "rathodsoham999@gmail.com"
+Y_PASSWORD = "QMCz_l_-vB3xnhJi"
 
 #This keeps our browser open
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
+
+#The Driver
+driver = webdriver.Chrome(options=chrome_options)
+driver.get(Y_URL)
+
+wait = WebDriverWait(driver, 2)
+
+y_sign_in_btn = wait.until(
+  ec.element_to_be_clickable(
+        (By.XPATH, '/html/body/div/p[2]/a')
+    )
+)
+y_sign_in_btn.click()
