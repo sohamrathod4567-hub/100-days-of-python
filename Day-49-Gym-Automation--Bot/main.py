@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 import os
-import time
 
 ACCOUNT_EMAIL= "rathodsoham999@gmail.com"      #Credentials which are used to log in to the gym page.
 ACCOUNT_PASSWORD ="9879915801"
