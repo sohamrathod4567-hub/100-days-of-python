@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
@@ -18,20 +19,29 @@ chrome_options.add_experimental_option("detach",True)
 
 class InstaFollower:
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(chrome_options)
 
 
     def login(self):
         self.driver.get(LOGIN_URL)
 
-        login_btn = self.driver.find_element(By.XPATH, "/html/body/div/aside/div/form/button")
-        login_btn.click()
+        first_login_btn = self.driver.find_element(By.XPATH, "/html/body/div/aside/div/form/button")
+        first_login_btn.click()
 
         username = self.driver.find_element(By.ID, 'username')
         username.send_keys(EMAIL)
 
         password = self.driver.find_element(By.ID, 'password')
         password.send_keys(PASSWORD)
+
+        login_btn = self.driver.find_element(By.XPATH, "/html/body/div/div/form/button")
+        login_btn.click()
+        time.sleep(2)
+
+        not_now_btn = self.driver.find_element(By.CLASS_NAME, "naan-popup-dismiss")
+        not_now_btn.click()
+
+
 
     def find_followers(self):
         pass
