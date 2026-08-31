@@ -21,6 +21,7 @@ class InstaFollower:
     def __init__(self):
         self.driver = webdriver.Chrome(chrome_options)
         self.driver.get(LOGIN_URL)
+        self.wait = WebDriverWait(self.driver, 2)
 
 
     def login(self):
@@ -53,8 +54,17 @@ class InstaFollower:
         search_input = self.driver.find_element(By.CLASS_NAME, "naan-search-input")
         search_input.send_keys(SIMILAR_ACCOUNT)
 
+        person_profile =self.wait.until(
+     ec.element_to_be_clickable(
+        (By.XPATH, '/html/body/aside/div[4]/a')
+         )
+         )
+
+        person_profile.click()
+
     def follow(self):
-        pass
+        followers = self.driver.find_element(By.XPATH, ' /html/body/div[1]/main/header/div[2]/div[2]/span[2]/a')
+        followers.click()
 
 bot = InstaFollower()
 bot.login()
