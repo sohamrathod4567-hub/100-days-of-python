@@ -20,10 +20,10 @@ chrome_options.add_experimental_option("detach",True)
 class InstaFollower:
     def __init__(self):
         self.driver = webdriver.Chrome(chrome_options)
+        self.driver.get(LOGIN_URL)
 
 
     def login(self):
-        self.driver.get(LOGIN_URL)
 
         first_login_btn = self.driver.find_element(By.XPATH, "/html/body/div/aside/div/form/button")
         first_login_btn.click()
@@ -41,10 +41,18 @@ class InstaFollower:
         not_now_btn = self.driver.find_element(By.CLASS_NAME, "naan-popup-dismiss")
         not_now_btn.click()
 
+        no_btn = self.driver.find_element(By.XPATH, '//*[@id="popup-notifications"]/div/button[2]')
+        no_btn.click()
+
 
 
     def find_followers(self):
-        pass
+        search_btn = self.driver.find_element(By.XPATH,'/html/body/div[1]/nav/button')
+        search_btn.click()
+
+        search_input = self.driver.find_element(By.CLASS_NAME, "naan-search-input")
+        search_input.send_keys(SIMILAR_ACCOUNT)
+
     def follow(self):
         pass
 
