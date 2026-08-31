@@ -13,14 +13,32 @@ LOGIN_URL = "https://app.100daysofpython.dev/services/share-a-naan/welcome"
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach",True)
 
-driver = webdriver.Chrome(options=chrome_options)
-driver.get(LOGIN_URL)
 
-login_btn = driver.find_element(By.XPATH, "/html/body/div/aside/div/form/button")
-login_btn.click()
 
-username = driver.find_element(By.ID, 'username')
-username.send_keys(EMAIL)
 
-password = driver.find_element(By.ID, 'password')
-password.send_keys(PASSWORD)
+class InstaFollower:
+    def __init__(self):
+        self.driver = webdriver.Chrome()
+
+
+    def login(self):
+        self.driver.get(LOGIN_URL)
+
+        login_btn = self.driver.find_element(By.XPATH, "/html/body/div/aside/div/form/button")
+        login_btn.click()
+
+        username = self.driver.find_element(By.ID, 'username')
+        username.send_keys(EMAIL)
+
+        password = self.driver.find_element(By.ID, 'password')
+        password.send_keys(PASSWORD)
+
+    def find_followers(self):
+        pass
+    def follow(self):
+        pass
+
+bot = InstaFollower()
+bot.login()
+bot.find_followers()
+bot.follow()
