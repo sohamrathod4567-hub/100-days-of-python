@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import ElementClickInterceptedException
 
 
 
@@ -65,6 +66,16 @@ class InstaFollower:
     def follow(self):
         followers = self.driver.find_element(By.XPATH, ' /html/body/div[1]/main/header/div[2]/div[2]/span[2]/a')
         followers.click()
+
+        list_of_followers = self.driver.find_elements(By.CSS_SELECTOR, ".followers-scroll button")
+        for follow  in list_of_followers:
+            try:
+                follow.click()
+                time.sleep(1)
+            except ElementClickInterceptedException:
+                    cancel_btn = self.driver.find_element(By.XPATH , '/html/body/div[6]/div/button[2]')
+                    cancel_btn.click()
+
 
 bot = InstaFollower()
 bot.login()
