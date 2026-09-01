@@ -67,13 +67,13 @@ wait = WebDriverWait(driver, 2)
 
 add = wait.until(
     ec.element_to_be_clickable(
-        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]')
+        (By.CSS_SELECTOR, "input.whsOnd")
     )
 )
 
 
 
-# sleep(1)
-# add.click()
-# add.send_keys("ELlo")
-print(add.get_attribute("outerHTML"))
+sleep(1)
+add.click()
+add.send_keys("ELlo")
+# print(add.get_attribute("outerHTML"))
