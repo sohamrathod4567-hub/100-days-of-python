@@ -17,6 +17,8 @@ links = []
 
 soup = BeautifulSoup(zillow_web_page, "html.parser")
 # print(soup.prettify())
+
+# Got all the Address
 all_addresses = soup.find_all("address", attrs={"data-test": "property-card-addr"})
 # print(all_addresses)
 
@@ -25,6 +27,7 @@ for address in all_addresses:
 
 # print(addy)
 
+# Got the Prices
 all_prices = soup.find_all(    "span",
     attrs={"data-test": "property-card-price"}
 )
@@ -36,3 +39,12 @@ for p in all_prices:
     price.append(price_only)
 
 # print(price)
+
+# Got the Links
+
+all_links = soup.find_all("a", attrs={"data-test": "property-card-link"})
+
+for link in all_links:
+    links.append(link.get("href"))
+
+print(links)
