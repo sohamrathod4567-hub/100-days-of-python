@@ -1,7 +1,12 @@
+from time import sleep
+
 import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 
 URL = "https://appbrewery.github.io/Zillow-Clone/"
 
@@ -46,5 +51,29 @@ all_links = soup.find_all("a", attrs={"data-test": "property-card-link"})
 
 for link in all_links:
     links.append(link.get("href"))
+# print(links)
 
-print(links)
+# This keeps our browser open
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option("detach",True)
+
+
+
+#The Driver
+driver = webdriver.Chrome(options=chrome_options)
+driver.get(FORM_URL)
+
+wait = WebDriverWait(driver, 2)
+
+add = wait.until(
+    ec.element_to_be_clickable(
+        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]')
+    )
+)
+
+
+
+# sleep(1)
+# add.click()
+# add.send_keys("ELlo")
+print(add.get_attribute("outerHTML"))
