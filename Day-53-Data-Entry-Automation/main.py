@@ -49,8 +49,8 @@ for p in all_prices:
 
 all_links = soup.find_all("a", attrs={"data-test": "property-card-link"})
 
-for link in all_links:
-    links.append(link.get("href"))
+for price_per_month in all_links:
+    links.append(price_per_month.get("href"))
 # print(links)
 
 # This keeps our browser open
@@ -64,10 +64,10 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get(FORM_URL)
 
 wait = WebDriverWait(driver, 2)
-
+inputa =(By.CSS_SELECTOR, "input.whsOnd")
 add = wait.until(
     ec.element_to_be_clickable(
-        (By.CSS_SELECTOR, "input.whsOnd")
+        inputa
     )
 )
 
@@ -78,11 +78,11 @@ add.click()
 add.send_keys("ELlo")
 # print(add.get_attribute("outerHTML"))
 
-link = wait.until(
+price_per_month = wait.until(
     ec.element_to_be_clickable(
-        (By.CSS_SELECTOR,"input.whsOnd"[1])
+        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
     )
 )
 
-link.click()
-link.send_keys("wassappp")
+price_per_month.click()
+price_per_month.send_keys("wassappp")
