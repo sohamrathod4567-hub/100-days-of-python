@@ -86,3 +86,20 @@ price_per_month = wait.until(
 
 price_per_month.click()
 price_per_month.send_keys("wassappp")
+
+
+link = wait.until(
+    ec.element_to_be_clickable(
+        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
+    )
+)
+
+link.click()
+link.send_keys("wassappp")
+
+submit_btn = wait.until(
+    ec.element_to_be_clickable(
+        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
+    )
+)
+submit_btn.click()
