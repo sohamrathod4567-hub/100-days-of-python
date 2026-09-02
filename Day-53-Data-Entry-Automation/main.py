@@ -67,7 +67,6 @@ driver = webdriver.Chrome(options=chrome_options)
 
 wait = WebDriverWait(driver, 2)
 for n in range(len(all_links)):
-    # TODO: Add fill in the link to your own Google From
     driver.get(FORM_URL)
 
     # Use the xpath to select the "short answer" fields in your Google Form.
