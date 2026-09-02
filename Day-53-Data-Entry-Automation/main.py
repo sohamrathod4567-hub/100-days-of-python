@@ -77,3 +77,12 @@ sleep(1)
 add.click()
 add.send_keys("ELlo")
 # print(add.get_attribute("outerHTML"))
+
+link = wait.until(
+    ec.element_to_be_clickable(
+        (By.CSS_SELECTOR,"input.whsOnd"[1])
+    )
+)
+
+link.click()
+link.send_keys("wassappp")
