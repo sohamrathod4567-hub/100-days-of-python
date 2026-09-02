@@ -53,53 +53,57 @@ for price_per_month in all_links:
     links.append(price_per_month.get("href"))
 # print(links)
 
-# This keeps our browser open
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option("detach",True)
-
-
-
-#The Driver
-driver = webdriver.Chrome(options=chrome_options)
-driver.get(FORM_URL)
-
-wait = WebDriverWait(driver, 2)
-inputa =(By.CSS_SELECTOR, "input.whsOnd")
-add = wait.until(
-    ec.element_to_be_clickable(
-        inputa
-    )
-)
-
-
-
-sleep(1)
-add.click()
-add.send_keys("ELlo")
-# print(add.get_attribute("outerHTML"))
-
-price_per_month = wait.until(
-    ec.element_to_be_clickable(
-        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
-    )
-)
-
-price_per_month.click()
-price_per_month.send_keys("wassappp")
-
-
-link = wait.until(
-    ec.element_to_be_clickable(
-        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
-    )
-)
-
-link.click()
-link.send_keys("wassappp")
-
-submit_btn = wait.until(
-    ec.element_to_be_clickable(
-        (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
-    )
-)
-submit_btn.click()
+# # This keeps our browser open
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.add_experimental_option("detach",True)
+#
+#
+#
+# #The Driver
+# driver = webdriver.Chrome(options=chrome_options)
+# driver.get(FORM_URL)
+#
+# wait = WebDriverWait(driver, 2)
+# inputa =(By.CSS_SELECTOR, "input.whsOnd")
+# add = wait.until(
+#     ec.element_to_be_clickable(
+#         inputa
+#     )
+# )
+#
+#
+#
+# sleep(1)
+# add.click()
+# add.send_keys("ELlo")
+# # print(add.get_attribute("outerHTML"))
+#
+# price_per_month = wait.until(
+#     ec.element_to_be_clickable(
+#         (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
+#     )
+# )
+#
+# price_per_month.click()
+# price_per_month.send_keys("wassappp")
+#
+#
+# link = wait.until(
+#     ec.element_to_be_clickable(
+#         (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
+#     )
+# )
+#
+# link.click()
+# link.send_keys("wassappp")
+#
+# submit_btn = wait.until(
+#     ec.element_to_be_clickable(
+#         (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
+#     )
+# )
+# submit_btn.click()
+all_link_elements = soup.select(".StyledPropertyCardDataWrapper a")
+all_links = [link["href"] for link in all_link_elements]
+print(f"There are {len(all_links)} links to individual listings in total: \n")
+print(all_links)
