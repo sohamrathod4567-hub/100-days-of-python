@@ -1,12 +1,32 @@
-from flask import Flask
-app = Flask(__name__)
+import time
+# from flask import Flask
+# app = Flask(__name__)
+#
+# @app.route('/')
+# def hello_world():
+#     # This will be shown im your browser
+#
+#
+#     return 'Hello, World!'
+#
+# if __name__ == "__main__":
+#     app.run()
 
-@app.route('/')
-def hello_world():
-    # This will be shown im your browser
 
+def delay_decorator(function):
+    def wrapper_function():
+        time.sleep(2)
+        #DO Something Before
+        function()
+        #Do Something After
+    return wrapper_function
 
-    return 'Hello, World!'
+@delay_decorator
+def say_hello():
+    print("Hello World")
 
-if __name__ == "__main__":
-    app.run()
+def say_ola():
+    print("Ola Amigos")
+
+say_hello()
+say_ola()
