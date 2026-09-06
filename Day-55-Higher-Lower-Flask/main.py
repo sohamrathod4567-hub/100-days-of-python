@@ -15,4 +15,4 @@ def greet_user(name):
     return f"Hello {name}"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
