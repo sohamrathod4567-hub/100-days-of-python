@@ -5,7 +5,7 @@ def bold_decorator(function):
     def wrapper_function():
         #DO Something Before
         result = function()
-        return f"\033[1m{result}\033[0m"
+        return f"<b>{result}</b>"
         #Do Something After
     return wrapper_function
 
@@ -19,4 +19,9 @@ def bold_decorator(function):
 def hello_world():
     # This will be shown im your browser
     return 'Hello, World!'
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
