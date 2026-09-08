@@ -10,6 +10,10 @@ def home():
 def pablo():
     return render_template("pablo.html")
 
+@app.route("/E1")
+def e1():
+    return render_template("E1.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
 
