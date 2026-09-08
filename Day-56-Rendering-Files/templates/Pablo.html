@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CTF :: Level 1 — System Boot</title>
+  <style>
+    /* ─── Global Reset & Base ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #00ff41;
+      font-family: 'Courier New', Courier, monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ─── Scanline overlay ───────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,255,65,0.03) 2px,
+        rgba(0,255,65,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* ─── Terminal container ─────────────────────────── */
+    .terminal {
+      width: min(700px, 95vw);
+      background: #0a0a0a;
+      border: 1px solid #00ff41;
+      border-radius: 6px;
+      box-shadow:
+        0 0 20px rgba(0,255,65,0.35),
+        0 0 60px rgba(0,255,65,0.10),
+        inset 0 0 20px rgba(0,255,65,0.04);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* ─── Title bar ──────────────────────────────────── */
+    .title-bar {
+      background: #111;
+      border-bottom: 1px solid #00ff41;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: #00ff41;
+      letter-spacing: 0.1em;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    .title-bar span { margin-left: auto; opacity: 0.7; }
+
+    /* ─── Log area ───────────────────────────────────── */
+    .log {
+      padding: 24px 28px;
+      line-height: 1.9;
+      font-size: 0.9rem;
+    }
+
+    .log-line {
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: pre-wrap;
+    }
+    .log-line.visible { opacity: 1; transform: none; }
+
+    /* Colour variants */
+    .dim   { color: #006b1a; }
+    .warn  { color: #ffcc00; text-shadow: 0 0 6px #ffcc00; }
+    .info  { color: #00cfff; text-shadow: 0 0 6px #00cfff; }
+    .glow  {
+      color: #00ff41;
+      text-shadow: 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,0.4);
+    }
+    .hint {
+      margin-top: 12px;
+      color: #555;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Blinking cursor ────────────────────────────── */
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 1.1em;
+      background: #00ff41;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+      box-shadow: 0 0 6px #00ff41;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ─── CTA button ─────────────────────────────────── */
+    .cta-wrap {
+      padding: 0 28px 28px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .cta-wrap.visible { opacity: 1; }
+
+    .cta-btn {
+      background: transparent;
+      color: #00ff41;
+      border: 1px solid #00ff41;
+      padding: 10px 28px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: background 0.25s, box-shadow 0.25s;
+    }
+    .cta-btn:hover {
+      background: rgba(0,255,65,0.12);
+      box-shadow: 0 0 14px rgba(0,255,65,0.5);
+    }
+
+    /* ─── Page-fade transition ───────────────────────── */
+    .fade-out { animation: fadeOut 0.6s forwards; }
+    @keyframes fadeOut { to { opacity: 0; } }
+  </style>
+</head>
+<body>
+
+  <!--
+    ╔══════════════════════════════════╗
+    ║  Level 1 Hidden Clue             ║
+    ║  Base64 key → QmVzdEZyaWVuZA==  ║
+    ║  Decoded   → BestFriend          ║
+    ╚══════════════════════════════════╝
+  -->
+
+  <div class="terminal" id="terminal">
+    <!-- Title-bar chrome -->
+    <div class="title-bar">
+      <div class="dot r"></div>
+      <div class="dot y"></div>
+      <div class="dot g"></div>
+      <span>root@ctf-system ~ bash</span>
+    </div>
+
+    <!-- Scrolling log lines (filled by JS) -->
+    <div class="log" id="log"></div>
+
+    <!-- Enter button revealed after logs finish -->
+    <div class="cta-wrap" id="ctaWrap">
+      <button class="cta-btn" onclick="proceed()">[ PROCEED TO AUTHENTICATION ]</button>
+    </div>
+  </div>
+
+  <script>
+    // ─── Boot log sequence ──────────────────────────────────
+    const lines = [
+      { text: '$ ./boot --mode=secure',                    cls: 'dim',  delay: 0    },
+      { text: 'Initializing system...',                    cls: '',     delay: 700  },
+      { text: 'Loading kernel modules............  [OK]',  cls: 'dim',  delay: 1300 },
+      { text: 'Mounting encrypted volumes............[OK]',cls: 'dim',  delay: 1700 },
+      { text: 'Bypassing firewall......................[OK]',cls:'dim',  delay: 2100 },
+      { text: 'Establishing secure tunnel.............[OK]',cls:'dim',  delay: 2500 },
+      { text: 'Scanning for active intrusions.........[OK]',cls:'dim',  delay: 2900 },
+      { text: '',                                          cls: '',     delay: 3200 },
+      { text: '⚠  AUTHENTICATION REQUIRED',               cls: 'warn', delay: 3400 },
+      { text: '',                                          cls: '',     delay: 3600 },
+      { text: 'Restricted zone detected.',                 cls: 'info', delay: 3800 },
+      { text: 'Clearance level: CLASSIFIED',              cls: 'info', delay: 4200 },
+      { text: '',                                          cls: '',     delay: 4500 },
+      { text: '> Not everything is visible on the surface.', cls:'glow',delay:4800 },
+      { text: '> Inspect the source. The key is hidden.',  cls: 'glow', delay: 5400 },
+      { text: '',                                          cls: '',     delay: 5900 },
+      { text: 'Awaiting valid credentials...',             cls: 'dim',  delay: 6100 },
+    ];
+
+    const log = document.getElementById('log');
+    const ctaWrap = document.getElementById('ctaWrap');
+
+    // Append a hint line (static, always visible at the bottom)
+    const hintEl = document.createElement('p');
+    hintEl.className = 'hint';
+    hintEl.textContent = '// Tip: right-click → View Page Source and hunt for the key.';
+    log.appendChild(hintEl);
+
+    // Reveal lines one-by-one with scheduled delays
+    lines.forEach(({ text, cls, delay }) => {
+      setTimeout(() => {
+        const p = document.createElement('p');
+        p.className = 'log-line' + (cls ? ' ' + cls : '');
+        p.textContent = text || '\u00A0'; // non-breaking space for blank lines
+        log.insertBefore(p, hintEl);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => p.classList.add('visible'));
+        });
+      }, delay);
+    });
+
+    // Show button after last log line
+    setTimeout(() => {
+      ctaWrap.classList.add('visible');
+      // Append blinking cursor to last visible log line
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      log.insertBefore(cursor, hintEl);
+    }, 6800);
+
+    // ─── Navigate with fade ─────────────────────────────────
+    function proceed() {
+      document.body.classList.add('fade-out');
+      setTimeout(() => window.location.href = 'login.html', 600);
+    }
+  </script>
+</body>
+</html>
