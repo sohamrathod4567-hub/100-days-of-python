@@ -1,7 +1,5 @@
 from random import randint
-
 from flask import Flask
-import random
 app = Flask(__name__)
 
 GOAL = randint(0,9)
