@@ -15,7 +15,8 @@ def home():
 def age(name):
     response = requests.get(f"https://api.agify.io?name={name}")
     data = response.json()
-    print(data["age"])
-    return data
+    name = data["name"]
+    old = data["age"]
+    return render_template("index.html", name = name, old = old)
 if __name__ == "__main__":
     app.run(debug=True)
