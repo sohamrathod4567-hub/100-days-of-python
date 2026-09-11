@@ -1,7 +1,8 @@
 import random
 from datetime import datetime
 from flask import Flask , render_template
-
+import requests
+URL = "https://api.agify.io"
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,8 +11,11 @@ def home():
     random_number = random.randint(1,10)
     return render_template("index.html", num = random_number, year = current_year)
 
-@app.route('/guess')
-def age():
-    return " I will guess your age"
+@app.route('/guess/<name>')
+def age(name):
+    response = requests.get(f"https://api.agify.io?name={name}")
+    data = response.json()
+    print(data["age"])
+    return data
 if __name__ == "__main__":
     app.run(debug=True)
