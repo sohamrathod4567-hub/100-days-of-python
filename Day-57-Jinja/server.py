@@ -21,9 +21,10 @@ def age(name):
 
 @app.route('/blog')
 def blog():
-    blog_url = "https://www.npoint.io/docs/c790b4d5cab58020d391"
+    blog_url = "https://api.npoint.io/ecfe5890e4857ae9911f"
     response = requests.get(blog_url)
     all_posts = response.json()
-    return render_template("blog.html", posts = all_posts)
+    return render_template("blog.html",posts= all_posts)
+
 if __name__ == "__main__":
     app.run(debug=True)
