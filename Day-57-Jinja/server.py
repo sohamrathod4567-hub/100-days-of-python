@@ -19,8 +19,9 @@ def age(name):
     old = data["age"]
     return render_template("index.html", name = name, old = old)
 
-@app.route('/blog')
-def get_blog():
+@app.route('/blog/<number>')
+def get_blog(number):
+    print(number)
     blog_url = "https://api.npoint.io/ecfe5890e4857ae9911f"
     response = requests.get(blog_url)
     all_posts = response.json()
