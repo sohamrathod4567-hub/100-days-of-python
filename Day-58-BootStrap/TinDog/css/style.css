@@ -20,9 +20,19 @@
   width: 3rem;
   height: 3rem;
   border-radius: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
 .profile-img {
   height: 100px;
   border-radius: 50%;
 }
+/*#testimonial {*/
+/*    min-height: 500px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    margin-left: 200px;*/
+/*}*/
