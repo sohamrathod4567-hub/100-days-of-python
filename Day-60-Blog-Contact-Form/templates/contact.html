@@ -29,9 +29,10 @@
           <!-- * * * * * * * * * * * * * * *-->
           <!-- * * Simplified SB Contact Form for the Tutorial* *-->
 <!--           add an "action" and a "method" to link this form to your main.py -->
-          <form
-            id="contactForm"
-            name="sentMessage"
+          <form action="{{ url_for('contact') }}"
+                id="contactForm"
+                method="post"
+                name="sentMessage"
           >
             <div class="form-floating">
               <input
