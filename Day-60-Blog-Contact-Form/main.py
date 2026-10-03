@@ -25,10 +25,9 @@ def contact():
         print(data["email"])
         print(data["message"])
         print(data["phone"])
-        return '<h1> The Form IS Submitted Successfully!!'
-
-
-    return render_template("contact.html")
+        text =  'The Form IS Submitted Successfully!!'
+        return render_template("contact.html", msg_sent=True)
+    return render_template("contact.html", msg_sent=False)
 
 
 @app.route("/post/<int:index>")
