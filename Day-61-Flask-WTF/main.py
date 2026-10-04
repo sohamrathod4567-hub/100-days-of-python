@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField , PasswordField , SubmitField
-from wtforms.validators import DataRequired , Email , Length
+from wtforms.validators import DataRequired , Email , Length , EqualTo
 
 '''
 Red underlines? Install the required packages first: 
@@ -33,7 +33,8 @@ def home():
 @app.route("/login" , methods =["GET","POST"])
 def login():
     login_form = LoginForm()
-    login_form.validate_on_submit()
+    if login_form.validate_on_submit():
+        print(login_form.email.data)
     return render_template('login.html', form=login_form)
 
 
