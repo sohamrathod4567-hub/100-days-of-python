@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField , PasswordField , SubmitField
 from wtforms.validators import DataRequired , Email , Length , EqualTo
+from flask_bootstrap import Bootstrap5 #pip Install Bootstrap-flask
 
 '''
 Red underlines? Install the required packages first: 
@@ -24,6 +25,7 @@ class LoginForm(FlaskForm):
 
 app = Flask(__name__)
 app.secret_key = "Soham is the Goat"
+bootstrap = Bootstrap5(app)
 
 
 @app.route("/")
