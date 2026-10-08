@@ -9,8 +9,12 @@
 
     {% block styles %}
     <!-- Load Bootstrap-Flask CSS here -->
+    {{ bootstrap.load_css() }}
 
     <!-- Link to the styles.css here to apply styling to all the child templates.-->
+     <link
+        rel="stylesheet"
+        href="{{ url_for('cafes' }}">
 
     {% endblock %}
     <title>{% block title %}{% endblock %}</title>
